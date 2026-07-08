@@ -1,0 +1,40 @@
+def largestRectangle(h):
+    pila = []
+    max_area = 0
+    i = 0
+    
+    while i < len(h):
+        # Si la pila está vacía o el edificio actual es más alto o igual que el del tope
+        if not pila or h[i] >= h[pila[-1]]:
+            pila.append(i)
+            i += 1
+        else:
+            # El edificio actual es más bajo, calculamos el área del edificio en el tope
+            top_de_pila = pila.pop()
+            
+            # Si la pila queda vacía, la anchura es 'i'
+            # Si no, la anchura se calcula entre el índice actual y el nuevo tope de la pila
+            if not pila:
+                anchura = i
+            else:
+                anchura = i - pila[-1] - 1
+                
+            area = h[top_de_pila] * anchura
+            max_area = max(max_area, area)
+            
+    # Al terminar el arreglo, procesamos los que quedaron atrapados en la pila
+    while pila:
+        top_de_pila = pila.pop()
+        if not pila:
+            anchura = i
+        else:
+            anchura = i - pila[-1] - 1
+            
+        area = h[top_de_pila] * anchura
+        max_area = max(max_area, area)
+        
+    return max_area
+
+
+
+
