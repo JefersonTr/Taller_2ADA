@@ -1,0 +1,17 @@
+def has_cycle(head):
+    if not head:
+        return 0
+    lento = head
+    rapido = head
+
+    # Recorremos la lista mientras el puntero rápido y su siguiente nodo no sean nulos
+    while rapido and rapido.next:
+        lento = lento.next          # Avanza 1 paso
+        rapido = rapido.next.next    # Avanza 2 pasos
+
+        # Si se encuentran, significa que hay un ciclo
+        if lento == rapido:
+            return 1
+            
+    # Si el puntero rápido llegó al final, no hay ciclo
+    return 0
